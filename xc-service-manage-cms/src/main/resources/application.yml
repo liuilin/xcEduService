@@ -1,10 +1,9 @@
 server:
   port: 31001
 spring:
-  application:
-    name: xc-service-manage-cms
   data:
     mongodb:
-      host: localhost
+      host: 122.51.150.222
+#      host: localhost
       port: 27017
       database: xc_cms
