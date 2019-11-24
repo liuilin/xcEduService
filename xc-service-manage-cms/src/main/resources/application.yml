@@ -6,4 +6,4 @@ spring:
       host: 122.51.150.222
 #      host: localhost
       port: 27017
-      database: xc_cms
+      database: admin
