@@ -3,26 +3,20 @@ package com.xuecheng.manage_cms.controller;
 import com.xuecheng.api.CmsPageControllerApi;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
+import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
-import com.xuecheng.framework.model.response.ResultCode;
 import com.xuecheng.manage_cms.service.CmsPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Daniel Liu 2019/11/19 9:50
  */
 @RestController
-@RequestMapping("/cms/page")
+@RequestMapping( "/cms/page" )
 public class CmsPageController implements CmsPageControllerApi {
 
     @Autowired
@@ -54,5 +48,15 @@ public class CmsPageController implements CmsPageControllerApi {
         queryResult.setList(list.getContent());
         queryResult.setTotal(list.getTotalElements());
         return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
+    }
+
+    /**@RequestBody将json转为对象
+     * @param cmsPage
+     * @return
+     */
+    @Override
+    @PostMapping( "/add" )
+    public CmsPageResult add(@RequestBody CmsPage cmsPage) {
+        return cmsPageService.add(cmsPage);
     }
 }

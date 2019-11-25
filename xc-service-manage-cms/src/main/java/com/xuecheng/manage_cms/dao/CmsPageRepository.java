@@ -8,5 +8,13 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface CmsPageRepository extends MongoRepository<CmsPage, String> {
 
-//    Optional<CmsPage> findCmsPageByPageAliase(String aliase);
+    /**
+     * 添加根据页面名称、站点Id、页面webpath查询页面方法，此方法用于校验页面是否存在
+     *
+     * @param pageName
+     * @param siteId
+     * @param pageWebPath
+     * @return
+     */
+    CmsPage findByPageNameAndSiteIdAndPageWebPath(String pageName, String siteId, String pageWebPath);
 }
