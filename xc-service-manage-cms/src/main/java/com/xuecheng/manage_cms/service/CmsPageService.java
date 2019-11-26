@@ -82,7 +82,9 @@ public class CmsPageService {
 //        return optional.orElse(null);
     }
 
-    /**更新页面内容
+    /**
+     * 更新页面内容
+     *
      * @param id
      * @param cmsPage
      * @return
@@ -102,8 +104,22 @@ public class CmsPageService {
             one.setPageWebPath(cmsPage.getPageWebPath());
             //更新物理路径
             one.setPagePhysicalPath(cmsPage.getPagePhysicalPath());
-            return new CmsPageResult(CommonCode.SUCCESS,cmsPageRepository.save(one));
+            return new CmsPageResult(CommonCode.SUCCESS, cmsPageRepository.save(one));
         }
         return null;
+    }
+
+    public ResponseResult del(String id) {
+        //先查询一下CmsPage，有则删除
+        Optional<CmsPage> cmsPage = cmsPageRepository.findById(id);
+//        cmsPage.ifPresent(page -> {
+//            cmsPageRepository.delete(page);
+//            return new ResponseResult(CommonCode.SUCCESS);
+//        });
+        if (cmsPage.isPresent()) {
+            cmsPageRepository.delete(cmsPage.get());
+            return new ResponseResult(CommonCode.SUCCESS);
+        }
+        return new ResponseResult(CommonCode.FAIL);
     }
 }

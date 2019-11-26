@@ -7,6 +7,7 @@ import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
+import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_cms.service.CmsPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,9 +51,10 @@ public class CmsPageController implements CmsPageControllerApi {
         return new QueryResponseResult(CommonCode.SUCCESS, queryResult);
     }
 
-    /**@RequestBody将json转为对象
+    /**
      * @param cmsPage
      * @return
+     * @RequestBody将json转为对象
      */
     @Override
     @PostMapping( "/add" )
@@ -61,21 +63,30 @@ public class CmsPageController implements CmsPageControllerApi {
     }
 
     @Override
-    @GetMapping("/findById/{id}")
+    @GetMapping( "/findById/{id}" )
     public CmsPage findById(@PathVariable String id) {
         return cmsPageService.findById(id);
     }
 
-    /**PutMapping用来更新，@RequestBody来接收json数据
+    /**
+     * PutMapping用来更新，@RequestBody来接收json数据
+     *
      * @param id
      * @param cmsPage
      * @return
      */
     @Override
-    @PutMapping("/update/{id}")
+    @PutMapping( "/update/{id}" )
     public CmsPageResult update(@PathVariable String id, @RequestBody CmsPage cmsPage) {
         return cmsPageService.update(id, cmsPage);
     }
 
-
+    /**
+     * @param id
+     * @return 删除不需要返回CMSPage，所以用普通的ResponseResult
+     */
+    @DeleteMapping( "/del/{id}" )
+    public ResponseResult del(@PathVariable String id) {
+        return cmsPageService.del(id);
+    }
 }
