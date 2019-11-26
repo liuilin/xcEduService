@@ -4,23 +4,23 @@ import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
+import com.xuecheng.framework.model.response.ResponseResult;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * @author Daniel Liu 2019/11/18 9:04
  */
 public interface CmsPageControllerApi {
 
-    /**自定义条件分页查询
-     * @param page
-     * @param size
-     * @param queryPageRequest
-     * @return
-     */
+    @ApiOperation("自定义条件分页查询")
     QueryResponseResult findList(int page, int size, QueryPageRequest queryPageRequest);
 
-    /**保存页面
-     * @param cmsPage
-     * @return
-     */
+    @ApiOperation("保存页面")
     CmsPageResult add(CmsPage cmsPage);
+
+    @ApiOperation("根据Id查询页面信息")
+    CmsPage findById(String id);
+
+    @ApiOperation( "根据Id查询页面信息" )
+    ResponseResult update(String id, CmsPage cmsPage);
 }

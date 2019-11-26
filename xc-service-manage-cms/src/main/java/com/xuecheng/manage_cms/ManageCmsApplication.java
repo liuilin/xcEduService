@@ -9,6 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * @author Daniel Liu 2019/11/19 9:40
  */
+//需要在启动类上加入@EnableSwagger2，否则打开swagger页面时会一直弹窗
 @EnableSwagger2
 @SpringBootApplication
 @EntityScan("com.xuecheng.framework.domain.cms")//扫描实体类

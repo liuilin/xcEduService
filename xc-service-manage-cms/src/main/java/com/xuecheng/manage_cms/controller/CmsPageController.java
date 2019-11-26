@@ -59,4 +59,23 @@ public class CmsPageController implements CmsPageControllerApi {
     public CmsPageResult add(@RequestBody CmsPage cmsPage) {
         return cmsPageService.add(cmsPage);
     }
+
+    @Override
+    @GetMapping("/findById/{id}")
+    public CmsPage findById(@PathVariable String id) {
+        return cmsPageService.findById(id);
+    }
+
+    /**PutMapping用来更新，@RequestBody来接收json数据
+     * @param id
+     * @param cmsPage
+     * @return
+     */
+    @Override
+    @PutMapping("/update/{id}")
+    public CmsPageResult update(@PathVariable String id, @RequestBody CmsPage cmsPage) {
+        return cmsPageService.update(id, cmsPage);
+    }
+
+
 }

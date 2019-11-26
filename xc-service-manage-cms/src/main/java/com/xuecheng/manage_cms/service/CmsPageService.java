@@ -4,11 +4,14 @@ import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.model.response.CommonCode;
+import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_cms.dao.CmsPageRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * @author Daniel Liu 2019/11/20 18:23
@@ -64,5 +67,43 @@ public class CmsPageService {
             return new CmsPageResult(CommonCode.SUCCESS, cmsPage);
         }
         return new CmsPageResult(CommonCode.FAIL, null);
+    }
+
+    /**
+     * 根据页面Id查询页面
+     *
+     * @param id
+     * @return
+     */
+    public CmsPage findById(String id) {
+        //若查到返回CmsPage，未查到返回null
+        return cmsPageRepository.findById(id).orElse(null);
+//        Optional<CmsPage> optional = cmsPageRepository.findById(id);
+//        return optional.orElse(null);
+    }
+
+    /**更新页面内容
+     * @param id
+     * @param cmsPage
+     * @return
+     */
+    public CmsPageResult update(String id, CmsPage cmsPage) {
+        CmsPage one = this.findById(id);
+        if (one != null) {
+            //更新模板Id
+            one.setTemplateId(cmsPage.getTemplateId());
+            //更新所属站点
+            one.setSiteId(cmsPage.getSiteId());
+            //更新页面别名
+            one.setPageAliase(cmsPage.getPageAliase());
+            //更新页面名称
+            one.setPageName(cmsPage.getPageName());
+            //更新访问路径
+            one.setPageWebPath(cmsPage.getPageWebPath());
+            //更新物理路径
+            one.setPagePhysicalPath(cmsPage.getPagePhysicalPath());
+            return new CmsPageResult(CommonCode.SUCCESS,cmsPageRepository.save(one));
+        }
+        return null;
     }
 }
