@@ -2,7 +2,9 @@ package com.xuecheng.manage_cms.service;
 
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
+import com.xuecheng.framework.domain.cms.response.CmsCode;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.exception.CustomException;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_cms.dao.CmsPageRepository;
@@ -53,20 +55,31 @@ public class CmsPageService {
 
 
     /**
-     * 页面保存
+     * 页面添加
+     * 是先判断是否有异常
      *
      * @param cmsPage
      */
-    public CmsPageResult add(CmsPage cmsPage) {
+    /*public CmsPageResult add(CmsPage cmsPage) {
         //添加根据页面名称、站点Id、页面webpath查询页面方法，此方法用于校验页面是否存在
         CmsPage page = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());
         if (page == null) {
-            //出于安全考虑，添加页面的主键由spring data自动生成
+            //出于安全考虑，添加页面的主键由spring data自动生成（防止接口被调用来篡改主Id？）
             cmsPage.setPageId(null);
             cmsPageRepository.save(cmsPage);
             return new CmsPageResult(CommonCode.SUCCESS, cmsPage);
         }
         return new CmsPageResult(CommonCode.FAIL, null);
+    }*/
+    public CmsPageResult add(CmsPage cmsPage) {
+        //添加根据页面名称、站点Id、页面webpath查询页面方法，此方法用于校验页面是否存在
+        CmsPage page = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());
+        if (page != null) {
+            throw new CustomException(CmsCode.CMS_PAGE_NAME_EXITS);
+        }
+        cmsPage.setPageId(null);
+        cmsPageRepository.save(cmsPage);
+        return new CmsPageResult(CommonCode.SUCCESS, cmsPage);
     }
 
     /**
@@ -109,6 +122,12 @@ public class CmsPageService {
         return null;
     }
 
+    /**
+     * 页面删除
+     *
+     * @param id
+     * @return
+     */
     public ResponseResult del(String id) {
         //先查询一下CmsPage，有则删除
         Optional<CmsPage> cmsPage = cmsPageRepository.findById(id);

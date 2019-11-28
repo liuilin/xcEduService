@@ -9,11 +9,25 @@ package com.xuecheng.framework.model.response;
  * 25000-- 文件系统
  */
 public interface ResultCode {
-    //操作是否成功,true为成功，false操作失败
-    boolean success();
-    //操作代码
-    int code();
-    //提示信息
-    String message();
 
+    /**
+     * 操作是否成功,true为成功，false操作失败
+     *
+     * @return
+     */
+    boolean success();
+
+    /**
+     * 操作代码
+     *
+     * @return
+     */
+    int code();
+
+    /**
+     * 提示信息
+     *
+     * @return
+     */
+    String message();
 }
