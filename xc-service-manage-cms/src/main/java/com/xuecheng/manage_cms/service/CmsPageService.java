@@ -1,5 +1,6 @@
 package com.xuecheng.manage_cms.service;
 
+import com.xuecheng.framework.domain.cms.CmsConfig;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsCode;
@@ -7,6 +8,7 @@ import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.exception.CustomException;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.ResponseResult;
+import com.xuecheng.manage_cms.dao.CmsConfigRepository;
 import com.xuecheng.manage_cms.dao.CmsPageRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class CmsPageService {
 
     @Autowired
     private CmsPageRepository cmsPageRepository;
+    @Autowired
+    private CmsConfigRepository cmsConfigRepository;
 
     /**
      * 分页查询
@@ -53,15 +57,13 @@ public class CmsPageService {
         return cmsPageRepository.findAll(example, pageable);
     }
 
-
     /**
      * 页面添加
      * 是先判断是否有异常
      *
      * @param cmsPage
      */
-    /*public CmsPageResult add(CmsPage cmsPage) {
-        //添加根据页面名称、站点Id、页面webpath查询页面方法，此方法用于校验页面是否存在
+    /*public CmsPageResult add(CmsPage cmsPage) { //添加根据页面名称、站点Id、页面webpath查询页面方法，此方法用于校验页面是否存在
         CmsPage page = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());
         if (page == null) {
             //出于安全考虑，添加页面的主键由spring data自动生成（防止接口被调用来篡改主Id？）
@@ -140,5 +142,9 @@ public class CmsPageService {
             return new ResponseResult(CommonCode.SUCCESS);
         }
         return new ResponseResult(CommonCode.FAIL);
+    }
+
+    public CmsConfig getConfigById(String id){
+        return cmsConfigRepository.findById(id).orElse(null);
     }
 }

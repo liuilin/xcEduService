@@ -1,0 +1,9 @@
+server:
+  port: 31001
+spring:
+  data:
+    mongodb:
+      host: 122.51.150.222
+#      host: localhost
+      port: 27017
+      database: admin
