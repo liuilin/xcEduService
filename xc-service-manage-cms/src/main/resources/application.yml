@@ -4,6 +4,10 @@ spring:
   data:
     mongodb:
       host: 122.51.150.222
-#      host: localhost
+      #      host: localhost
       port: 27017
       database: admin
+  freemarker:
+    cache: false #关闭模板缓存，方便测试
+    settings:
+      template_update_delay: 0

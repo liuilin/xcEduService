@@ -52,9 +52,11 @@ public class CmsPageController implements CmsPageControllerApi {
     }
 
     /**
+     * 将json转为对象
+     *
      * @param cmsPage
      * @return
-     * @RequestBody将json转为对象
+     * @RequestBody
      */
     @Override
     @PostMapping( "/add" )
@@ -82,8 +84,10 @@ public class CmsPageController implements CmsPageControllerApi {
     }
 
     /**
+     * 删除不需要返回CMSPage，所以用普通的ResponseResult
+     *
      * @param id
-     * @return 删除不需要返回CMSPage，所以用普通的ResponseResult
+     * @return
      */
     @DeleteMapping( "/del/{id}" )
     public ResponseResult del(@PathVariable String id) {
