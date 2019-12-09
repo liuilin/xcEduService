@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: xc-test-rabbitmq-product
+  rabbitmq:
+    host: 122.51.150.222
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+server:
+  port: 42001

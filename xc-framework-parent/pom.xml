@@ -6,6 +6,8 @@
     <modules>
         <module>../xc-service-manage-cms</module>
         <module>../xc-framework-freemarker</module>
+        <module>../xc-test-rabbitmq-product</module>
+        <module>../xc-test-rabbitmq-comsumer</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
