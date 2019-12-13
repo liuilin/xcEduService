@@ -8,6 +8,7 @@
         <module>../xc-framework-freemarker</module>
         <module>../xc-test-rabbitmq-product</module>
         <module>../xc-test-rabbitmq-comsumer</module>
+        <module>../xc-service-manage-cms-client</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -158,6 +159,12 @@
 <!--                <artifactId>spring-boot-devtools</artifactId>-->
 <!--                <optional>true</optional>-->
 <!--            </dependency>-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.0.7</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <build>

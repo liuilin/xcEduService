@@ -72,6 +72,7 @@ public class CmsPageController implements CmsPageControllerApi {
 
     /**
      * PutMapping用来更新，@RequestBody来接收json数据
+     * （可以研究一下如何接收日期类型，定义了DateJacksonConverter和ConverterConfig）
      *
      * @param id
      * @param cmsPage
@@ -89,8 +90,19 @@ public class CmsPageController implements CmsPageControllerApi {
      * @param id
      * @return
      */
+    @Override
     @DeleteMapping( "/del/{id}" )
     public ResponseResult del(@PathVariable String id) {
         return cmsPageService.del(id);
+    }
+
+    /**页面发布
+     * @param id
+     * @return
+     */
+    @Override
+    @PostMapping("/postPage/{id}")
+    public ResponseResult postPage(@PathVariable String id) {
+        return cmsPageService.postPage(id);
     }
 }
