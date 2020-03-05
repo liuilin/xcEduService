@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 /**
  * @author Daniel Liu 2019/12/8 22:34
  */
@@ -25,4 +28,17 @@ public class RabbitmqConfigTest {
         }
     }
 
+    @Test
+    public void a(){
+//        List<Integer> integers = Arrays.asList(1, 2, 3, 4);
+//        integers.stream().map((integer -> {
+//            integers.size();
+//            return null;
+//        }));
+        String[] names = {"Sam", "Pamela", "Dave", "Pascal", "Erik"};
+        IntStream.range(0, names.length)
+                .filter(i -> names[i].length() <= i)
+                .mapToObj(i -> names[i])
+                .collect(Collectors.toList());
+    }
 }

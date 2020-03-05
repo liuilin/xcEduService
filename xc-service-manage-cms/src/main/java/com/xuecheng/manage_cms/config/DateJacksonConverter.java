@@ -27,7 +27,7 @@ public class DateJacksonConverter extends JsonDeserializer<Date> {
         String originDate = p.getText();
         if (StringUtils.isNotEmpty(originDate)) {
             try {
-                long longDate = Long.valueOf(originDate.trim());
+                long longDate = Long.parseLong(originDate.trim());
                 targetDate = new Date(longDate);
             } catch (NumberFormatException e) {
                 try {

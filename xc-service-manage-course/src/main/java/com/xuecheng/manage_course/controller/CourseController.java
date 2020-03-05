@@ -1,6 +1,7 @@
 package com.xuecheng.manage_course.controller;
 
 import com.xuecheng.api.CourseControllerApi;
+import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.ResponseResult;
@@ -21,9 +22,9 @@ public class CourseController implements CourseControllerApi {
     @Autowired
     private CourseService courseService;
 
-    @PostMapping( "/" )
-    public ResponseResult create(@RequestBody @Valid Void input) {
-        return new ResponseResult(CommonCode.SUCCESS);
+    @Override
+    public ResponseResult addTeachPlan(Teachplan teachplan) {
+        return courseService.addTeachPlan(teachplan);
     }
 
     @GetMapping( "/teachplan/list/{courseId}" )
