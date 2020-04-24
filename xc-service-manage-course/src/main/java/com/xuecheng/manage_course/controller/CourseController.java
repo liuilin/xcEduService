@@ -23,7 +23,8 @@ public class CourseController implements CourseControllerApi {
     private CourseService courseService;
 
     @Override
-    public ResponseResult addTeachPlan(Teachplan teachplan) {
+    @PostMapping("/teachplan/add")
+    public ResponseResult addTeachPlan(@RequestBody Teachplan teachplan) {
         return courseService.addTeachPlan(teachplan);
     }
 
