@@ -8,16 +8,17 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by admin on 2018/2/7.
+ * @author Daniel Liu 2020/4/27 16:57
  */
 @Data
 @ToString
 @Entity
-@Table(name="category")
-@GenericGenerator(name = "jpa-assigned", strategy = "assigned")
-//@GenericGenerator(name = "jpa-uuid", strategy = "uuid")
+@Table(name = "category")
+@GenericGenerator(name = "jpa-assigned",strategy = "assigned")
 public class Category implements Serializable {
+
     private static final long serialVersionUID = -906357110051689484L;
+
     @Id
     @GeneratedValue(generator = "jpa-assigned")
     @Column(length = 32)
@@ -28,5 +29,4 @@ public class Category implements Serializable {
     private String isshow;
     private Integer orderby;
     private String isleaf;
-
 }

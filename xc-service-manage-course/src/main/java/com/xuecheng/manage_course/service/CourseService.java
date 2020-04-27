@@ -1,12 +1,19 @@
 package com.xuecheng.manage_course.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.Teachplan;
+import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
+import com.xuecheng.framework.domain.course.request.CourseListRequest;
 import com.xuecheng.framework.exception.CustomException;
 import com.xuecheng.framework.model.response.CommonCode;
+import com.xuecheng.framework.model.response.QueryResponseResult;
+import com.xuecheng.framework.model.response.QueryResult;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_course.dao.CourseBaseRepository;
+import com.xuecheng.manage_course.dao.CourseMapper;
 import com.xuecheng.manage_course.dao.TeachPlanRepository;
 import com.xuecheng.manage_course.dao.TeachplanMapper;
 import org.springframework.beans.BeanUtils;
@@ -32,14 +39,17 @@ public class CourseService {
     private TeachPlanRepository teachPlanRepository;
     @Autowired
     private CourseBaseRepository courseBaseRepository;
+    @Autowired
+    private CourseMapper courseMapper;
+
+    public void print(String s) {
+        System.out.print(s);
+    }
 
     public TeachplanNode findTeachplanList(String courseId) {
         return teachplanMapper.findTeachPlanById(courseId);
     }
 
-    public void print(String s) {
-        System.out.print(s);
-    }
 
     @Transactional
     public ResponseResult addTeachPlan(Teachplan teachplan) {
@@ -97,5 +107,22 @@ public class CourseService {
         }
         //返回根节点id
         return teachplans.get(0).getId();
+    }
+
+    /**
+     * 分页查询课程列表
+     *
+     * @param page
+     * @param size
+     * @param courseListRequest
+     * @return
+     */
+    public QueryResponseResult<CourseInfo> findCourseList(int page, int size, CourseListRequest courseListRequest) {
+        PageHelper.startPage(page, size);
+        Page<CourseInfo> courseListPage = courseMapper.findCourseListPage(courseListRequest);
+        QueryResult<CourseInfo> courseInfoQueryResult = new QueryResult<>();
+        courseInfoQueryResult.setList(courseListPage.getResult());
+        courseInfoQueryResult.setTotal(courseListPage.getTotal());
+        return new QueryResponseResult<>(CommonCode.SUCCESS,courseInfoQueryResult);
     }
 }
