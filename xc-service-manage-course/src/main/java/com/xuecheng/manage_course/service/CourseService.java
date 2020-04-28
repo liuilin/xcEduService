@@ -2,6 +2,7 @@ package com.xuecheng.manage_course.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.xuecheng.framework.domain.cms.response.CourseResult;
 import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
@@ -123,6 +124,18 @@ public class CourseService {
         QueryResult<CourseInfo> courseInfoQueryResult = new QueryResult<>();
         courseInfoQueryResult.setList(courseListPage.getResult());
         courseInfoQueryResult.setTotal(courseListPage.getTotal());
-        return new QueryResponseResult<>(CommonCode.SUCCESS,courseInfoQueryResult);
+        return new QueryResponseResult<>(CommonCode.SUCCESS, courseInfoQueryResult);
+    }
+
+    /**
+     * 新增课程
+     *
+     * @param courseBase
+     * @return
+     */
+    @Transactional
+    public CourseResult save(CourseBase courseBase) {
+        CourseBase save = courseBaseRepository.save(courseBase);
+        return new CourseResult(CommonCode.SUCCESS,save);
     }
 }

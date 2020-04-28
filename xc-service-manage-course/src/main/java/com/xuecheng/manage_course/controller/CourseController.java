@@ -1,6 +1,8 @@
 package com.xuecheng.manage_course.controller;
 
 import com.xuecheng.api.CourseControllerApi;
+import com.xuecheng.framework.domain.cms.response.CourseResult;
+import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
@@ -35,6 +37,12 @@ public class CourseController implements CourseControllerApi {
     @GetMapping( "/coursebase/list/{page}/{size}" )
     public QueryResponseResult<CourseInfo> findCourseList(@PathVariable int page, @PathVariable int size, CourseListRequest courseListRequest) {
         return courseService.findCourseList(page, size, courseListRequest);
+    }
+
+    @Override
+    @PostMapping("/coursebase/add")
+    public CourseResult save(@RequestBody CourseBase courseBase) {
+        return courseService.save(courseBase);
     }
 
     @GetMapping( "/teachplan/list/{courseId}" )
