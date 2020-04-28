@@ -26,15 +26,15 @@ public class CourseController implements CourseControllerApi {
     private CourseService courseService;
 
     @Override
-    @PostMapping("/teachplan/add")
+    @PostMapping( "/teachplan/add" )
     public ResponseResult addTeachPlan(@RequestBody Teachplan teachplan) {
         return courseService.addTeachPlan(teachplan);
     }
 
     @Override
-    @GetMapping("/coursebase/list/{page}/{size}")
-    public QueryResponseResult<CourseInfo> findCourseList( @PathVariable int page, @PathVariable int size, CourseListRequest courseListRequest) {
-        return courseService.findCourseList(page, size,  courseListRequest);
+    @GetMapping( "/coursebase/list/{page}/{size}" )
+    public QueryResponseResult<CourseInfo> findCourseList(@PathVariable int page, @PathVariable int size, CourseListRequest courseListRequest) {
+        return courseService.findCourseList(page, size, courseListRequest);
     }
 
     @GetMapping( "/teachplan/list/{courseId}" )
