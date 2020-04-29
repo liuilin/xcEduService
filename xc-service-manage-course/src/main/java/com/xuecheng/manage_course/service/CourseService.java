@@ -2,6 +2,7 @@ package com.xuecheng.manage_course.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.xuecheng.framework.domain.cms.response.CmsCode;
 import com.xuecheng.framework.domain.cms.response.CourseResult;
 import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.Teachplan;
@@ -136,6 +137,41 @@ public class CourseService {
     @Transactional
     public CourseResult save(CourseBase courseBase) {
         CourseBase save = courseBaseRepository.save(courseBase);
-        return new CourseResult(CommonCode.SUCCESS,save);
+        return new CourseResult(CommonCode.SUCCESS, save);
+    }
+
+    /**
+     * 根据课程id获取课程信息
+     *
+     * @param courseId
+     * @return CourseBase
+     */
+    public CourseBase getCourseBaseById(String courseId) {
+        Optional<CourseBase> optional = courseBaseRepository.findById(courseId);
+        return optional.orElse(null);
+    }
+
+    /**
+     * 更新课程信息
+     *
+     * @param courseId
+     * @param courseBase entity must not be null
+     * @return
+     */
+    @Transactional
+    public ResponseResult updateCourseBase(String courseId, CourseBase courseBase) {
+        CourseBase one = this.getCourseBaseById(courseId);
+        if (one == null) {
+            throw new CustomException(CmsCode.COURSE_BASE_DOES_NOT_EXIT);
+        }
+        one.setName(courseBase.getName());
+        one.setUsers(courseBase.getUsers());
+        one.setMt(courseBase.getMt());
+        one.setSt(courseBase.getSt());
+        one.setGrade(courseBase.getGrade());
+        one.setStudymodel(courseBase.getStudymodel());
+        one.setDescription(courseBase.getDescription());
+        courseBaseRepository.save(one);
+        return new ResponseResult(CommonCode.SUCCESS);
     }
 }

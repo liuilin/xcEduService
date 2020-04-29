@@ -12,7 +12,8 @@ public enum CmsCode implements ResultCode {
     CMS_PAGE_DATAURL_NO_EXITS(false, 24002, "数据URL不存在"),
     CMS_PAGE_DOES_NOT_EXIST(false, 24003, "页面不存在"),
     CMS_PAGE_TEMPLATE_IS_EMPTY(false, 24004, "页面模板为空"),
-    CMS_PAGE_HTML_ISNULL(false, 24005, "生成页面HTML为空");
+    CMS_PAGE_HTML_ISNULL(false, 24005, "生成页面HTML为空"),
+    COURSE_BASE_DOES_NOT_EXIT(false, 24006, "课程基本信息不存在");
 
     boolean success;
     int code;
