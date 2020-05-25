@@ -34,5 +34,5 @@ public interface CourseControllerApi {
     @ApiOperation( "更新课程信息" )
     ResponseResult updateCourseBase(String courseId, CourseBase courseBase);
 
-    //TODO 课程营销功能实现
+    //TODO 课程营销功能实现111
 }
