@@ -7,7 +7,7 @@ public class XcServiceList {
     public static final String XC_SERVICE_SEARCH = "xc-com.xuecheng.manage_cms.service-search";
     public static final String XC_SERVICE_MANAGE_COURSE = "xc-com.xuecheng.manage_cms.service-manage-course";
     public static final String XC_SERVICE_MANAGE_MEDIA = "xc-com.xuecheng.manage_cms.service-manage-media";
-    public static final String XC_SERVICE_MANAGE_CMS = "xc-com.xuecheng.manage_cms.service-manage-cms";
+    public static final String XC_SERVICE_MANAGE_CMS = "XC-SERVICE-MANAGE-CMS";
     public static final String XC_SERVICE_UCENTER = "xc-com.xuecheng.manage_cms.service-ucenter";
     public static final String XC_SERVICE_UCENTER_AUTH = "xc-com.xuecheng.manage_cms.service-ucenter-auth";
     public static final String XC_SERVICE_UCENTER_JWT = "xc-com.xuecheng.manage_cms.service-ucenter-jwt";

@@ -1,6 +1,8 @@
 server:
-  port: 31001
+  port: ${PORT:31001}
 spring:
+  application:
+    name: xc-service-manage-cms
   data:
     mongodb:
       host: 122.51.150.222
@@ -17,3 +19,12 @@ spring:
     username: guest
     password: guest
     virtual-host: /
+eureka:
+  client:
+    registerWithEureka: true #服务注册开关
+    fetchRegistry: true #服务发现开关
+    serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔
+      defaultZone: ${EUREKA_SERVER:http://localhost:50101/eureka/}
+  instance:
+    prefer‐ip‐address: true #将自己的ip地址注册到Eureka服务中
+    ip‐address: ${IP_ADDRESS:127.0.0.1}
