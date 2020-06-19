@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "xuecheng.elasticsearch.hostList",
+      "type": "java.lang.String",
+      "description": "Description for xuecheng.elasticsearch.hostList."
+  }
+] }
