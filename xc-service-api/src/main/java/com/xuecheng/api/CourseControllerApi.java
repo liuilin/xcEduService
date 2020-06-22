@@ -2,6 +2,7 @@ package com.xuecheng.api;
 
 import com.xuecheng.framework.domain.cms.response.CourseResult;
 import com.xuecheng.framework.domain.course.CourseBase;
+import com.xuecheng.framework.domain.course.CourseView;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
@@ -34,5 +35,7 @@ public interface CourseControllerApi {
     @ApiOperation( "更新课程信息" )
     ResponseResult updateCourseBase(String courseId, CourseBase courseBase);
 
+    @ApiOperation( "课程视图查询" )
+    CourseView getCourseViewById(String id);
     //TODO 课程营销功能实现
 }

@@ -24,6 +24,7 @@ import java.util.*;
 @RunWith(SpringRunner.class)
 public class FreemarkerTest {
 
+
     //基于模板生成静态化文件
     @Test
     public void testGenerateHtml() throws IOException, TemplateException {

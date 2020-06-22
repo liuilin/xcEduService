@@ -39,6 +39,16 @@ public class GridFsTest {
         System.out.println(id);
     }
 
+    //存模板文件
+    @Test
+    public void testStore() throws FileNotFoundException {
+        //定义file
+        File file = new File("G:\\IdeaProjects\\xcEduService\\xc-framework-freemarker\\src\\main\\resources\\templates\\course.ftl");
+        //定义fileInputStream
+        FileInputStream fileInputStream = new FileInputStream(file);
+        ObjectId objectId = gridFsTemplate.store(fileInputStream, "course.ftl");
+        System.out.println(objectId);
+    }
     @Test
     public void findOne() throws IOException {
         //查询文件
