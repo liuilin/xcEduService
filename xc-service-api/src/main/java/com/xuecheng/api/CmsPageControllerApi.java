@@ -13,21 +13,24 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 public interface CmsPageControllerApi {
 
-    @ApiOperation("自定义条件分页查询")
+    @ApiOperation( "自定义条件分页查询" )
     QueryResponseResult findList(int page, int size, QueryPageRequest queryPageRequest);
 
-    @ApiOperation("保存页面")
+    @ApiOperation( "新增页面" )
     CmsPageResult add(CmsPage cmsPage);
 
-    @ApiOperation("根据Id查询页面信息")
+    @ApiOperation( "根据Id查询页面信息" )
     CmsPage findById(String id);
 
     @ApiOperation( "更新页面信息" )
     ResponseResult update(String id, CmsPage cmsPage);
 
-    @ApiOperation("页面删除")
+    @ApiOperation( "页面删除" )
     ResponseResult del(@PathVariable String id);
 
-    @ApiOperation("发布页面")
+    @ApiOperation( "发布页面" )
     ResponseResult postPage(String id);
+
+    @ApiOperation( "保存页面" )
+    CmsPageResult save(CmsPage cmsPage);
 }

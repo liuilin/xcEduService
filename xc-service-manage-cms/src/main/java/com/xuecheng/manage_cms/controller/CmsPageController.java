@@ -96,13 +96,21 @@ public class CmsPageController implements CmsPageControllerApi {
         return cmsPageService.del(id);
     }
 
-    /**页面发布
+    /**
+     * 页面发布
+     *
      * @param id
      * @return
      */
     @Override
-    @PostMapping("/postPage/{id}")
+    @PostMapping( "/postPage/{id}" )
     public ResponseResult postPage(@PathVariable String id) {
         return cmsPageService.postPage(id);
+    }
+
+    @Override
+    @PostMapping( "/save" )
+    public CmsPageResult save(@RequestBody CmsPage cmsPage) {
+        return cmsPageService.save(cmsPage);
     }
 }

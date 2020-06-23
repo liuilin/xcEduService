@@ -344,4 +344,23 @@ public class CmsPageService {
         cmsPage.setHtmlFileId(String.valueOf(objectId));
         return cmsPageRepository.save(cmsPage);
     }
+
+    /**
+     * 保存页面，无则添加，有则更新
+     *
+     * @param cmsPage
+     * @return
+     */
+    public CmsPageResult save(CmsPage cmsPage) {
+        //添加根据页面名称、站点Id、页面webpath查询页面方法，此方法用于校验页面是否存在
+        CmsPage one = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(), cmsPage.getSiteId(), cmsPage.getPageWebPath());
+        System.out.println("page = " + one );
+        if (one != null) {
+//            throw new CustomException(CmsCode.CMS_PAGE_NAME_EXITS);
+            return this.update(one.getPageId(), cmsPage);
+        } else {
+            return this.add(cmsPage);
+        }
+    }
+
 }

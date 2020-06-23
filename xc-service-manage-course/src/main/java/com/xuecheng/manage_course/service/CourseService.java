@@ -2,7 +2,9 @@ package com.xuecheng.manage_course.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.response.CmsCode;
+import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.domain.cms.response.CourseResult;
 import com.xuecheng.framework.domain.course.*;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
@@ -13,9 +15,11 @@ import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
 import com.xuecheng.framework.model.response.ResponseResult;
+import com.xuecheng.manage_course.client.CmsPageClient;
 import com.xuecheng.manage_course.dao.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -31,6 +35,18 @@ import java.util.Optional;
  */
 @Service
 public class CourseService {
+    @Value( "${course-publish.dataUrlPre}" )
+    private String publish_dataUrlPre;
+    @Value( "${course-publish.pagePhysicalPath}" )
+    private String publish_page_physicalpath;
+    @Value( "${course-publish.pageWebPath}" )
+    private String publish_page_webpath;
+    @Value( "${course-publish.siteId}" )
+    private String publish_siteId;
+    @Value( "${course-publish.templateId}" )
+    private String publish_templateId;
+    @Value( "${course-publish.previewUrl}" )
+    private String previewUrl;
     @Autowired
     private TeachplanMapper teachplanMapper;
     @Autowired
@@ -43,6 +59,8 @@ public class CourseService {
     private CourseMarketRepository courseMarketRepository;
     @Autowired
     private CoursePicRepository coursePicRepository;
+    @Autowired
+    private CmsPageClient cmsPageClient;
 
     public void print(String s) {
         System.out.print(s);
@@ -205,5 +223,42 @@ public class CourseService {
         TeachplanNode teachplanNode = teachplanMapper.findTeachPlanById(id);
         courseView.setTeachplanNode(teachplanNode);
         return courseView;
+    }
+
+    /**
+     * 课程预览
+     *
+     * @param courseId 页面Id
+     * @return
+     */
+    public CoursePublishResult preview(String courseId) {
+        CourseBase one = this.getCourseBaseById(courseId);
+
+        //准备发布课程预览页面
+         CmsPage cmsPage = new CmsPage();
+        //站点
+        cmsPage.setSiteId(publish_siteId);//课程预览站点
+        //模板
+        cmsPage.setTemplateId(publish_templateId);
+        //页面名称
+        cmsPage.setPageName(courseId + ".html");
+        //页面别名
+        cmsPage.setPageAliase(one.getName());
+        //页面访问路径
+        cmsPage.setPageWebPath(publish_page_webpath);
+        //页面存储路径
+        cmsPage.setPagePhysicalPath(publish_page_physicalpath);
+        //数据url
+        cmsPage.setDataUrl(publish_dataUrlPre + courseId);
+        //远程请求cms保存页面信息
+        CmsPageResult cmsPageResult = cmsPageClient.save(cmsPage);
+        if (!cmsPageResult.isSuccess()) {
+            return new CoursePublishResult(CommonCode.FAIL, null);
+        }
+        //页面id
+        String pageId = cmsPageResult.getCmsPage().getPageId();
+        //页面url
+        String pageUrl = previewUrl + pageId;
+        return new CoursePublishResult(CommonCode.SUCCESS, pageUrl);
     }
 }

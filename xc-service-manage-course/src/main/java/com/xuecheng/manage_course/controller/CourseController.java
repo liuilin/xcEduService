@@ -3,6 +3,7 @@ package com.xuecheng.manage_course.controller;
 import com.xuecheng.api.CourseControllerApi;
 import com.xuecheng.framework.domain.cms.response.CourseResult;
 import com.xuecheng.framework.domain.course.CourseBase;
+import com.xuecheng.framework.domain.course.CoursePublishResult;
 import com.xuecheng.framework.domain.course.CourseView;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
@@ -79,4 +80,9 @@ public class CourseController implements CourseControllerApi {
         return new ResponseResult(CommonCode.SUCCESS);
     }
 
+    @Override
+    @PostMapping( "/preview/{courseId}" )
+    public CoursePublishResult preview(@PathVariable String courseId) {
+        return courseService.preview(courseId);
+    }
 }
