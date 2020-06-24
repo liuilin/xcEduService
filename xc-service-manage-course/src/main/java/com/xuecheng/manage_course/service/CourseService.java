@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.response.CmsCode;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.domain.cms.response.CmsPostPageResult;
 import com.xuecheng.framework.domain.cms.response.CourseResult;
 import com.xuecheng.framework.domain.course.*;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
@@ -235,7 +236,7 @@ public class CourseService {
         CourseBase one = this.getCourseBaseById(courseId);
 
         //准备发布课程预览页面
-         CmsPage cmsPage = new CmsPage();
+        CmsPage cmsPage = new CmsPage();
         //站点
         cmsPage.setSiteId(publish_siteId);//课程预览站点
         //模板
@@ -260,5 +261,49 @@ public class CourseService {
         //页面url
         String pageUrl = previewUrl + pageId;
         return new CoursePublishResult(CommonCode.SUCCESS, pageUrl);
+    }
+
+    @Transactional
+    public CoursePublishResult publish(String courseId) {
+        CourseBase one = this.getCourseBaseById(courseId);
+
+        //准备cmsPage信息
+        //准备发布课程预览页面
+        CmsPage cmsPage = new CmsPage();
+        //站点
+        cmsPage.setSiteId(publish_siteId);//课程预览站点
+        //模板
+        cmsPage.setTemplateId(publish_templateId);
+        //页面名称
+        cmsPage.setPageName(courseId + ".html");
+        //页面别名
+        cmsPage.setPageAliase(one.getName());
+        //页面访问路径
+        cmsPage.setPageWebPath(publish_page_webpath);
+        //页面存储路径
+        cmsPage.setPagePhysicalPath(publish_page_physicalpath);
+        //数据url
+        cmsPage.setDataUrl(publish_dataUrlPre + courseId);
+
+        //调用cms一键发布接口将课程详情页面发布到服务器
+        CmsPostPageResult cmsPostPageResult = cmsPageClient.oneClickPostPage(cmsPage);
+        if (!cmsPostPageResult.isSuccess()) {
+            return new CoursePublishResult(CommonCode.FAIL, null);
+        }
+        //保存课程的发布状态为“已发布”
+        CourseBase courseBase = this.setStatus(courseId);
+        //保存课程索引信息
+        //...
+        //缓存课程的信息
+        //...
+        String pageUrl = cmsPostPageResult.getPageUrl();
+        return new CoursePublishResult(CommonCode.SUCCESS,pageUrl);
+    }
+
+    private CourseBase setStatus(String courseId) {
+        CourseBase one = this.getCourseBaseById(courseId);
+        //用的是数据字典
+        one.setStatus("202002");
+        return courseBaseRepository.save(one);
     }
 }
