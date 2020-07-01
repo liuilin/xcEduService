@@ -171,7 +171,7 @@ public class CourseService {
     }
 
     /**
-     * 更新课程信息
+     * 更新课程信息1
      *
      * @param courseId
      * @param courseBase entity must not be null
