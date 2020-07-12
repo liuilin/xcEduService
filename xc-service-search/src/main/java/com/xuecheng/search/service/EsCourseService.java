@@ -86,7 +86,7 @@ public class EsCourseService {
             return new QueryResponseResult(CommonCode.SUCCESS, new QueryResult<CoursePub>());
         }
 
-        //结果集处理
+        //结果集处理1
         SearchHits hits = searchResponse.getHits();
         SearchHit[] searchHits = hits.getHits();
 
