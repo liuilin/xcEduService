@@ -2,7 +2,6 @@ package com.xuecheng.framework.model.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * @Author: mrt.
@@ -11,7 +10,6 @@ import lombok.ToString;
  * @Modified By:
  */
 @Data
-@ToString
 @NoArgsConstructor
 public class ResponseResult implements Response {
 

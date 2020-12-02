@@ -2,6 +2,7 @@ package com.xuecheng.framework.client;
 
 
 public class XcServiceList {
+
     public static final String XC_GOVERN_CENTER = "xc-govern-center";
     public static final String XC_SERVICE_PORTALVIEW = "xc-com.xuecheng.manage_cms.service-portalview";
     public static final String XC_SERVICE_SEARCH = "xc-com.xuecheng.manage_cms.service-search";

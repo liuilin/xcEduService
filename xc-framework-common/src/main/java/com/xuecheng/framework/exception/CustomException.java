@@ -15,7 +15,7 @@ import lombok.Getter;
  * 不可预知异常通常是由于系统出现bug、或一些不要抗拒的错误（比如网络中断、服务器宕机等），异常类型为RuntimeException类型（运行时异常）。
  * 5、可预知的异常及不可预知的运行时异常最终会采用统一的信息格式（错误代码+错误信息）来表示，最终也会随请求响应给客户端。
  *
- * @author Daniel Liu 2019/11/27 8:09
+ * @author Daniel Liu 2019/11/27
  */
 @Getter
 public class CustomException extends RuntimeException {
