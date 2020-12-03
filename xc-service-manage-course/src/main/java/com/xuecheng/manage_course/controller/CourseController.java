@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 /**
- * 课程类
+ * 课程类1
  * @author Daniel Liu 2019/12/18 8:38
  */
 
