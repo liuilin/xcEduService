@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface CmsPageControllerApi {
 
     @ApiOperation( "自定义条件分页查询" )
-    QueryResponseResult findList(int page, int size, QueryPageRequest queryPageRequest);
+    QueryResponseResult findList(String page, String size, QueryPageRequest queryPageRequest);
 
     @ApiOperation( "新增页面" )
     CmsPageResult add(CmsPage cmsPage);

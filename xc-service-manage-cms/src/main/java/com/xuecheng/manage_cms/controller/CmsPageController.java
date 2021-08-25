@@ -26,7 +26,7 @@ public class CmsPageController implements CmsPageControllerApi {
 
     @Override
     @GetMapping( "/list/{page}/{size}" )
-    public QueryResponseResult findList(@PathVariable( "page" ) int page, @PathVariable( "size" ) int size, QueryPageRequest queryPageRequest) {
+    public QueryResponseResult findList(@PathVariable( "page" ) String page, @PathVariable( "size" ) String size, QueryPageRequest queryPageRequest) {
         /*//暂时采用测试数据，测试接口是否可以正常运行
         QueryResult queryResult = new QueryResult();
         queryResult.setTotal(2);
@@ -38,14 +38,16 @@ public class CmsPageController implements CmsPageControllerApi {
         queryResult.setList(list);
         QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS, queryResult);
         return queryResponseResult;*/
-        if (page <= 0) {
-            page = 1;
+        int pageNum = Integer.valueOf(page);
+        if (pageNum <= 0) {
+            pageNum = 1;
         }
-        page = page - 1;
-        if (size <= 0) {
-            size = 10;
+        pageNum = pageNum - 1;
+        int sizeNum = Integer.valueOf(size);
+        if (sizeNum <= 0) {
+            sizeNum = 10;
         }
-        Page<CmsPage> list = cmsPageService.findList(page, size, queryPageRequest);
+        Page<CmsPage> list = cmsPageService.findList(pageNum, sizeNum, queryPageRequest);
         QueryResult<CmsPage> queryResult = new QueryResult<>();
         queryResult.setList(list.getContent());
         queryResult.setTotal(list.getTotalElements());
