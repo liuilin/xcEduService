@@ -4,3 +4,5 @@
 /xc-service-manage-cms/target/
 
 *.jar
+
+/docker-compose/mongo
