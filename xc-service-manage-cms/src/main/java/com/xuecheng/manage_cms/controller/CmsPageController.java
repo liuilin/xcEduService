@@ -15,7 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * CMS 页面管理模块
+ * CMS 页面管理模块.
  * @author Daniel Liu 2019/11/19 9:50
  */
 @RestController
