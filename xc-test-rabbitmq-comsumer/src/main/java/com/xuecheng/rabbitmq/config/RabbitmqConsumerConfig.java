@@ -23,7 +23,7 @@ public class RabbitmqConsumerConfig {
     /**
      * Topic交换机类型
      */
-    public static final String EXCHANGE_INFORM_TOPIC = "exchange_inform_topic";
+    private static final String EXCHANGE_INFORM_TOPIC = "exchange_inform_topic";
 
     @Bean( QUEUE_INFORM_SMS )
     public Queue QUEUE_INFORM_SMS() {

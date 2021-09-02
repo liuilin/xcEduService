@@ -13,17 +13,17 @@ public class RabbitmqConfig {
     /**
      * 短信队列
      */
-    public static final String QUEUE_INFORM_SMS = "queue_inform_sms";
+    private static final String QUEUE_INFORM_SMS = "queue_inform_sms";
 
     /**
      * 邮箱队列
      */
-    public static final String QUEUE_INFORM_EMAIL = "queue_inform_email";
+    private static final String QUEUE_INFORM_EMAIL = "queue_inform_email";
 
     /**
      * Topic交换机类型
      */
-    public static final String EXCHANGE_INFORM_TOPIC = "exchange_inform_topic";
+    static final String EXCHANGE_INFORM_TOPIC = "exchange_inform_topic";
 
     @Bean( QUEUE_INFORM_SMS )
     public Queue QUEUE_INFORM_SMS() {
