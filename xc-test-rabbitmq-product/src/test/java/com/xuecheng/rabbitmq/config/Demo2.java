@@ -1,7 +1,7 @@
 package com.xuecheng.rabbitmq.config;
 
 /**
- * 打印 Zi...0，因为如果从子类往上开始找，一旦发现执行的方法对应的子类有重写，必走子类.
+ * 打印 Zi...0，因为如果从子类往上开始找，一旦发现执行的方法对应的子类有重写，必走子类
  * @author liuqiang
  * @since 2021-09-02
  */
