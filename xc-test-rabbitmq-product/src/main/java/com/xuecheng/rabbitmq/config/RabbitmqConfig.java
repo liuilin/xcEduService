@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitmqConfig {
     /**
-     * 短信队列
+     * 短信队列.
      */
     private static final String QUEUE_INFORM_SMS = "queue_inform_sms";
 
