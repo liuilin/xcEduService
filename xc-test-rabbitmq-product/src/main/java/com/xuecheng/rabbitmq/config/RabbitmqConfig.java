@@ -36,7 +36,7 @@ public class RabbitmqConfig {
     }
 
     /**
-     * ExchangeBuilder提供了fanout、direct、topic、header交换机类型的配置
+     * ExchangeBuilder提供了fanout、direct、topic、header交换机类型的配置.
      *
      * @return exchange
      */
